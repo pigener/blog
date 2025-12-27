@@ -1,2 +1,4 @@
-> here is a souce code.
-`print("Hello.")`
+> here is a python souce code.
+```python
+print("Hello.")
+```
