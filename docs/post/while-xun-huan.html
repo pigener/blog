@@ -10,15 +10,13 @@
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
-<meta name="description" content="> here is a python souce code.
-```python
-print('Hello.')
-```。">
+<meta name="description" content="`while` 循环 (Indefinite Loops)
+
+**核心目标：** 理解何时使用“不确定性循环”，并掌握其控制逻辑。">
 <meta property="og:title" content="while循环">
-<meta property="og:description" content="> here is a python souce code.
-```python
-print('Hello.')
-```。">
+<meta property="og:description" content="`while` 循环 (Indefinite Loops)
+
+**核心目标：** 理解何时使用“不确定性循环”，并掌握其控制逻辑。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://pigener.github.io/blog/post/while-xun-huan.html">
 <meta property="og:image" content="https://github.githubassets.com/favicons/favicon.svg">
@@ -89,10 +87,93 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
 </div>
     <div id="content">
-<div class="markdown-body" id="postBody"><blockquote>
-<p>here is a python souce code.</p>
-</blockquote>
-<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-en">print</span>(<span class="pl-s">"Hello."</span>)</pre></div></div>
+<div class="markdown-body" id="postBody"><p><code class="notranslate">while</code> 循环 (Indefinite Loops)</p>
+<p><strong>核心目标：</strong> 理解何时使用“不确定性循环”，并掌握其控制逻辑。</p>
+<h2>1. 核心概念：为什么需要 <code class="notranslate">while</code>？</h2>
+<ul>
+<li><strong><code class="notranslate">for</code> 循环</strong> 是“确定性”的：你知道要循环多少次（比如“遍历这个列表”或“重复10次”）。</li>
+<li></li>
+</ul>
+<p><strong><code class="notranslate">while</code> 循环</strong> 是“不确定性”的：你不知道要循环多少次，只知道<strong>什么时候该停</strong> 。</p>
+<p><strong>逻辑流程：</strong></p>
+<p><code class="notranslate">while</code> 循环会在条件为真（）时重复执行代码块。每次执行前都会检查条件 。</p>
+<h3>基础语法</h3>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-k">while</span> <span class="pl-s1">condition</span>:
+    <span class="pl-c"># 只要 condition 是 True，这就一直运行</span>
+    <span class="pl-c"># 这里必须有改变 condition 的代码，否则会死循环</span></pre></div>
+<h2>一旦条件变为假（），循环终止，程序继续向下执行 。</h2>
+<h2>2. 进阶控制：<code class="notranslate">break</code>, <code class="notranslate">continue</code>, <code class="notranslate">else</code></h2>
+<p>为了精准控制流程，Python 提供了三个关键词：</p>
+<ol>
+<li>
+<p><strong><code class="notranslate">break</code> (立即停止):</strong> 无论条件是否满足，立即强行跳出循环 。</p>
+</li>
+<li>
+<p><strong><code class="notranslate">continue</code> (跳过本次):</strong> 停止当前的循环体执行，直接跳回到开头进行下一次条件判断 。</p>
+</li>
+<li>
+<p><strong><code class="notranslate">else</code> (正常结束):</strong> 只有当循环是<strong>正常结束</strong>（即条件变成 False）时执行。如果是被 <code class="notranslate">break</code> 打断的，则<strong>不</strong>执行 <code class="notranslate">else</code> 块 。</p>
+</li>
+</ol>
+<hr>
+<h2>3. 行业应用实战 (Real-world Scenarios)</h2>
+<p>不要只练习 <code class="notranslate">i = i + 1</code>。我们来看两个真实的场景。</p>
+<h3>场景一：金融科技 (FinTech) —— 财富目标计算器</h3>
+<p><strong>场景：</strong> 你想存钱买房。你每月存一笔钱，这笔钱还会产生复利。你不知道具体<strong>哪一年</strong>能存够首付，这取决于增长率。这是一个典型的“未知迭代次数”问题 。</p>
+<p><strong>代码与解析：</strong></p>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">target</span> <span class="pl-c1">=</span> <span class="pl-c1">500000</span>       <span class="pl-c"># 目标金额：50万</span>
+<span class="pl-s1">balance</span> <span class="pl-c1">=</span> <span class="pl-c1">20000</span>       <span class="pl-c"># 初始存款</span>
+<span class="pl-s1">rate</span> <span class="pl-c1">=</span> <span class="pl-c1">0.05</span>           <span class="pl-c"># 年利率 5%</span>
+<span class="pl-s1">monthly_deposit</span> <span class="pl-c1">=</span> <span class="pl-c1">3000</span> <span class="pl-c"># 每月定投</span>
+<span class="pl-s1">months</span> <span class="pl-c1">=</span> <span class="pl-c1">0</span>            <span class="pl-c"># 计数器</span>
+
+<span class="pl-c"># 逻辑：只要余额 &lt; 目标，就必须继续存，不能停</span>
+<span class="pl-k">while</span> <span class="pl-s1">balance</span> <span class="pl-c1">&lt;</span> <span class="pl-s1">target</span>:
+    <span class="pl-c"># 1. 加上每月的存款</span>
+    <span class="pl-s1">balance</span> <span class="pl-c1">+=</span> <span class="pl-s1">monthly_deposit</span>
+    
+    <span class="pl-c"># 2. 加上当月的利息 (简化算法)</span>
+    <span class="pl-s1">balance</span> <span class="pl-c1">+=</span> <span class="pl-s1">balance</span> <span class="pl-c1">*</span> (<span class="pl-s1">rate</span> <span class="pl-c1">/</span> <span class="pl-c1">12</span>)
+    
+    <span class="pl-c"># 3. 时间流逝</span>
+    <span class="pl-s1">months</span> <span class="pl-c1">+=</span> <span class="pl-c1">1</span>
+
+<span class="pl-en">print</span>(<span class="pl-s">f"需要 <span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">months</span> <span class="pl-c1">//</span> <span class="pl-c1">12</span><span class="pl-kos">}</span></span> 年 <span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">months</span> <span class="pl-c1">%</span> <span class="pl-c1">12</span><span class="pl-kos">}</span></span> 个月才能达成目标。"</span>)</pre></div>
+<p><strong>关键点：</strong> 我们无法预知 <code class="notranslate">months</code> 最终是多少，必须由 <code class="notranslate">while</code> 根据 <code class="notranslate">balance</code> 的实时变化来决定。</p>
+<hr>
+<h3>场景二：后端开发 —— 服务器连接重试 (Retry Logic)</h3>
+<p><strong>场景：</strong> 在网络编程中，连接服务器并不总是一次成功。如果连接失败，我们不能无限等待（死循环），也不能只试一次就放弃。通常做法是：“尝试连接，直到成功，或者达到最大重试次数” 。</p>
+<p><strong>代码与解析：</strong></p>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">random</span> <span class="pl-c"># 用于模拟连接结果</span>
+
+<span class="pl-s1">connected</span> <span class="pl-c1">=</span> <span class="pl-c1">False</span>      <span class="pl-c"># 连接状态</span>
+<span class="pl-s1">attempts</span> <span class="pl-c1">=</span> <span class="pl-c1">0</span>           <span class="pl-c"># 当前尝试次数</span>
+<span class="pl-s1">max_retries</span> <span class="pl-c1">=</span> <span class="pl-c1">3</span>        <span class="pl-c"># 最大允许重试次数</span>
+
+<span class="pl-c"># 逻辑：两个条件同时满足才循环</span>
+<span class="pl-c"># 1. 还没连上 (not connected)</span>
+<span class="pl-c"># 2. 还没超过最大次数 (attempts &lt; max_retries)</span>
+<span class="pl-k">while</span> <span class="pl-c1">not</span> <span class="pl-s1">connected</span> <span class="pl-c1">and</span> <span class="pl-s1">attempts</span> <span class="pl-c1">&lt;</span> <span class="pl-s1">max_retries</span>:
+    <span class="pl-s1">attempts</span> <span class="pl-c1">+=</span> <span class="pl-c1">1</span>
+    <span class="pl-en">print</span>(<span class="pl-s">f"正在尝试第 <span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">attempts</span><span class="pl-kos">}</span></span> 次连接..."</span>)
+    
+    <span class="pl-c"># 模拟连接：假设只有 20% 概率成功</span>
+    <span class="pl-k">if</span> <span class="pl-s1">random</span>.<span class="pl-c1">random</span>() <span class="pl-c1">&gt;</span> <span class="pl-c1">0.8</span>:
+        <span class="pl-s1">connected</span> <span class="pl-c1">=</span> <span class="pl-c1">True</span>  <span class="pl-c"># 改变状态，这将导致循环终止</span>
+    <span class="pl-k">else</span>:
+        <span class="pl-en">print</span>(<span class="pl-s">"连接失败，准备重试。"</span>)
+
+<span class="pl-c"># 善后处理：利用 else 区分是“连上了”还是“次数用完了”</span>
+<span class="pl-k">if</span> <span class="pl-s1">connected</span>:
+    <span class="pl-en">print</span>(<span class="pl-s">"系统：连接成功！[200 OK]"</span>)
+<span class="pl-k">else</span>:
+    <span class="pl-en">print</span>(<span class="pl-s">"错误：连接超时，请检查网络。"</span>)</pre></div>
+<p><strong>循序渐进解析：</strong></p>
+<ol>
+<li><strong>复合条件：</strong> <code class="notranslate">while not connected and attempts &lt; max_retries</code>。这是 <code class="notranslate">while</code> 最强大的地方，可以同时监控多个状态。</li>
+<li><strong>状态变更：</strong> <code class="notranslate">connected = True</code> 是循环退出的“成功”出口。</li>
+<li><strong>计数器限制：</strong> <code class="notranslate">attempts</code> 是循环退出的“失败”出口（防止无限死循环）。</li>
+</ol></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
